@@ -1,17 +1,20 @@
+'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('UserGroup', {
       userId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.INTEGER
       },
       groupId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.INTEGER
       },
     });
   },
-  down: (queryInterface) => {
+
+  down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('UserGroup');
   }
 };

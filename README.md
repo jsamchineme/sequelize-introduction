@@ -4,4 +4,4 @@ This repo is a product of a online instruction session covering a basic introduc
 ## Download the Video
 The session was recorded with Zoom. You can find the download link below.
 
-https://andela.zoom.us/recording/play/8A3D7oySqH33hfCC1iCRj5qi-iPSqp90wV6Pn607Mqi4l_XdwJQ12oVtL-GrKUem?continueMode=true
+https://drive.google.com/file/d/1mTIrHrmS8YmhKcwpPsCIpN0WNlMa5qt-/view?usp=sharing

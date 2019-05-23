@@ -1,17 +1,20 @@
+'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('UserFollower', {
       userId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.INTEGER
       },
       followerId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.INTEGER
       },
     });
   },
-  down: (queryInterface) => {
+
+  down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('UserFollower');
   }
 };

@@ -1,41 +1,31 @@
-import db from '../models';
-
+import { User } from '../models';
 
 export const createUser = async (req, res) => {
-  const newUser = await db.User.create(req.body);
+  const newUser = await User.create(req.body);
 
-  return res.status(201).send({
+  return res.status(200).json({
     data: newUser
   });
 }
 
 export const getAllUsers = async (req, res) => {
-  const allUsers = await db.User.findAll();
+  const users = await User.findAll();
 
-  return res.status(201).send({
-    data: allUsers
+  return res.status(200).json({
+    data: users
   });
 }
 
 export const followUser = async (req, res) => {
   const { userId, followerId } = req.params;
-  const user = await db.User.findByPk(userId);
-  const follower = await db.User.findByPk(followerId);
 
-  const newFollowing = await user.addFollowers(follower);
+  const user = await User.findByPk(userId);
+  const follower = await User.findByPk(followerId);
+  await user.addFollowers(follower);
 
   const followers = await user.getFollowers();
 
-  const userData = user.toJSON();
-  userData.followers = followers.map(item => {
-    return {
-      id: item.id,
-      firstname: item.firstname,
-      lastname: item.lastname,
-    };
-  });
-
-  return res.status(201).send({
-    data: userData
+  return res.status(200).json({
+    data: followers
   });
 }

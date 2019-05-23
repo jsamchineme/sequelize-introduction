@@ -1,9 +1,12 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
-    userId: DataTypes.INTEGER,
     content: DataTypes.STRING,
-    published: DataTypes.BOOLEAN
+    title: DataTypes.STRING,
+    type: DataTypes.STRING,
+    published: DataTypes.BOOLEAN,
+    userId: DataTypes.INTEGER,
+    resourceId: DataTypes.INTEGER,
   }, {});
   Post.associate = function(models) {
     // associations can be defined here

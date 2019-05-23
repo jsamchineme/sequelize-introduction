@@ -1,41 +1,31 @@
-import db from '../models';
-
+import { Group, User } from '../models';
 
 export const createGroup = async (req, res) => {
-  const newGroup = await db.Group.create(req.body);
+  const newGroup = await Group.create(req.body);
 
-  return res.status(201).send({
+  return res.status(200).json({
     data: newGroup
   });
 }
 
 export const getAllGroups = async (req, res) => {
-  const allGroups = await db.Group.findAll();
+  const groups = await Group.findAll();
 
-  return res.status(201).send({
-    data: allGroups
+  return res.status(200).json({
+    data: groups
   });
 }
 
 export const addUserToGroup = async (req, res) => {
   const { userId, groupId } = req.params;
 
-  const user = await db.User.findByPk(userId);
-  const group = await db.Group.findByPk(groupId);
+  const user = await User.findByPk(userId);
+  const group = await Group.findByPk(groupId);
+  await user.addGroups(group);
 
-  const newUserGroup = await user.addGroups(group);
-
-  const userData = user.toJSON();
   const groups = await user.getGroups();
 
-  userData.groups = groups.map(item => {
-    return {
-      id: item.id,
-      name: item.name,
-    }
+  return res.status(200).json({
+    data: groups
   });
-
-  return res.status(200).send({
-    data: userData
-  })
 }

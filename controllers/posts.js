@@ -1,21 +1,15 @@
-import db from '../models';
-
+import { Post, User } from '../models';
 
 export const createPost = async (req, res) => {
-  const newPost = await db.Post.create({
+  const { userId } = req.query;
+  const user = await User.findByPk(userId);
+  const newPost = await user.createPost({
     ...req.body,
-    userId: req.query.userId
+    published: false,
+    resourceId: userId,
   });
 
-  return res.status(201).send({
+  return res.status(200).json({
     data: newPost
-  });
-}
-
-export const getAllPosts = async (req, res) => {
-  const allPosts = await db.Post.findAll();
-
-  return res.status(201).send({
-    data: allPosts
   });
 }

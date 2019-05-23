@@ -1,3 +1,4 @@
+'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Posts', {
@@ -7,17 +8,29 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
       content: {
+        type: Sequelize.STRING,
         allowNull: false,
-        type: Sequelize.STRING
+      },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      type: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       published: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        type: Sequelize.BOOLEAN
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      resourceId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -29,7 +42,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface) => {
+  down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Posts');
   }
 };
